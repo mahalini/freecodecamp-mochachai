@@ -11,7 +11,7 @@ suite('Unit Tests', function () {
     // #2
     test('#isDefined, #isUndefined', function () {
       assert.isUndefined(null, 'null is not undefined');
-      assert.isDefined(undefined, 'undefined IS undefined');
+      assert.isUndefined(undefined, 'undefined IS undefined');
       assert.isDefined('hello', 'A string is not undefined');
     });
     // #3
@@ -34,14 +34,14 @@ suite('Unit Tests', function () {
     // #5
     test('#equal, #notEqual', function () {
       assert.equal(12, '12', 'Numbers are coerced into strings with ==');
-      assert.notEqual({ value: 1 }, { value: 1 }, '== compares object references');
+      assert.equal({ value: 1 }, { value: 1 }, '== compares object references');
       assert.notEqual(6 * '2', '12');
       assert.notEqual(6 + '2', '12');
     });
     // #6
     test('#strictEqual, #notStrictEqual', function () {
       assert.strictEqual(6, '6');
-      assert.notStrictEqual(6, 3 * 2);
+      assert.strictEqual(6, 3 * 2);
       assert.strictEqual(6 * '2', 12);
       assert.notStrictEqual([1, 'a', {}], [1, 'a', {}]);
     });
@@ -63,12 +63,12 @@ suite('Unit Tests', function () {
     test('#isAbove, #isAtMost', function () {
       assert.isAbove('hello'.length, 5);
       assert.isAbove(1, 0);
-      assert.isAbove(Math.PI, 3);
+      assert.isAtMost(Math.PI, 3);
       assert.isAtMost(1 - Math.random(), 1);
     });
     // #9
     test('#isBelow, #isAtLeast', function () {
-      assert.isBelow('world'.length, 5);
+      assert.isAtLeast('world'.length, 5);
       assert.isAtLeast(2 * Math.random(), 0);
       assert.isBelow(5 % 2, 2);
       assert.isBelow(2 / 3, 1);
@@ -92,7 +92,7 @@ suite('Unit Tests', function () {
     });
     // #12
     test('Array #include, #notInclude', function () {
-      assert.include(winterMonths, 'jul', "It's summer in july...");
+      assert.notInclude(winterMonths, 'jul', "It's summer in july...");
       assert.include(backendLanguages, 'javascript', 'JS is a backend language');
     });
   });
@@ -143,8 +143,8 @@ suite('Unit Tests', function () {
   suite('Objects', function () {
     // #16
     test('#property, #notProperty', function () {
-      assert.property(myCar, 'wings', "Cars don't have wings");
-      assert.notProperty(airlinePlane, 'engines', 'Planes have engines');
+      assert.notProperty(myCar, 'wings', "Cars don't have wings");
+      assert.property(airlinePlane, 'engines', 'Planes have engines');
       assert.property(myCar, 'wheels', 'Cars have wheels');
     });
     // #17
@@ -152,7 +152,7 @@ suite('Unit Tests', function () {
       assert.typeOf(myCar, 'object');
       assert.typeOf(myCar.model, 'string');
       assert.typeOf(airlinePlane.wings, 'string');
-      assert.typeOf(airlinePlane.engines, 'array');
+      assert.notTypeOf(airlinePlane.engines, 'array');
       assert.typeOf(myCar.wheels, 'number');
     });
     // #18
@@ -160,7 +160,7 @@ suite('Unit Tests', function () {
       assert.notInstanceOf(myCar, Plane);
       assert.instanceOf(airlinePlane, Plane);
       assert.instanceOf(airlinePlane, Object);
-      assert.notInstanceOf(myCar.wheels, String);
+      assert.instanceOf(myCar.wheels, String);
     });
   });
 
