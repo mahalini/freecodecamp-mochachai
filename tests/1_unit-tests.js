@@ -10,7 +10,7 @@ suite('Unit Tests', function () {
     });
     // #2
     test('#isDefined, #isUndefined', function () {
-      assert.isUndefined(null, 'null is not undefined');
+      assert.isDefined(null, 'null is not undefined');
       assert.isUndefined(undefined, 'undefined IS undefined');
       assert.isDefined('hello', 'A string is not undefined');
     });
@@ -34,13 +34,13 @@ suite('Unit Tests', function () {
     // #5
     test('#equal, #notEqual', function () {
       assert.equal(12, '12', 'Numbers are coerced into strings with ==');
-      assert.equal({ value: 1 }, { value: 1 }, '== compares object references');
-      assert.notEqual(6 * '2', '12');
+      assert.notEqual({ value: 1 }, { value: 1 }, '== compares object references');
+      assert.equal(6 * '2', '12');
       assert.notEqual(6 + '2', '12');
     });
     // #6
     test('#strictEqual, #notStrictEqual', function () {
-      assert.strictEqual(6, '6');
+      assert.notStrictEqual(6, '6');
       assert.strictEqual(6, 3 * 2);
       assert.strictEqual(6 * '2', 12);
       assert.notStrictEqual([1, 'a', {}], [1, 'a', {}]);
@@ -61,9 +61,9 @@ suite('Unit Tests', function () {
   suite('Comparisons', function () {
     // #8
     test('#isAbove, #isAtMost', function () {
-      assert.isAbove('hello'.length, 5);
+      assert.isAtMost('hello'.length, 5);
       assert.isAbove(1, 0);
-      assert.isAtMost(Math.PI, 3);
+      assert.isAbove(Math.PI, 3);
       assert.isAtMost(1 - Math.random(), 1);
     });
     // #9
@@ -75,8 +75,8 @@ suite('Unit Tests', function () {
     });
     // #10
     test('#approximately', function () {
-      assert.approximately(weirdNumbers(0.5), 1, 0);
-      assert.approximately(weirdNumbers(0.2), 1, 0);
+      assert.approximately(weirdNumbers(0.5), 1, 0.5);
+      assert.approximately(weirdNumbers(0.2), 1, 0.5);
     });
   });
 
@@ -151,8 +151,8 @@ suite('Unit Tests', function () {
     test('#typeOf, #notTypeOf', function () {
       assert.typeOf(myCar, 'object');
       assert.typeOf(myCar.model, 'string');
-      assert.typeOf(airlinePlane.wings, 'string');
-      assert.notTypeOf(airlinePlane.engines, 'array');
+      assert.notTypeOf(airlinePlane.wings, 'string');
+      assert.typeOf(airlinePlane.engines, 'array');
       assert.typeOf(myCar.wheels, 'number');
     });
     // #18
@@ -160,7 +160,7 @@ suite('Unit Tests', function () {
       assert.notInstanceOf(myCar, Plane);
       assert.instanceOf(airlinePlane, Plane);
       assert.instanceOf(airlinePlane, Object);
-      assert.instanceOf(myCar.wheels, String);
+      assert.notInstanceOf(myCar.wheels, String);
     });
   });
 
